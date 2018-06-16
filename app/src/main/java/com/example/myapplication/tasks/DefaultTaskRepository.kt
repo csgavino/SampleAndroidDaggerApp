@@ -1,8 +1,8 @@
-package com.example.myapplication
+package com.example.myapplication.tasks
 
 class DefaultTaskRepository : TaskRepository {
 
     override fun getTasks(): List<String> {
-        return listOf("Study Japanese")
+        return listOf("Study Dagger 2")
     }
 }

@@ -1,27 +1,12 @@
 package com.example.myapplication
 
-import android.app.Application
-import android.content.Context
-import com.example.myapplication.di.ApplicationComponent
 import com.example.myapplication.di.DaggerApplicationComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class MainApplication : Application() {
-    lateinit var applicationComponent: ApplicationComponent
+class MainApplication : DaggerApplication() {
 
-    companion object {
-        fun get(context: Context): MainApplication {
-            return context.applicationContext as MainApplication
-        }
-    }
-
-    fun getComponent(): ApplicationComponent {
-        return applicationComponent
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-
-        applicationComponent = DaggerApplicationComponent.create()
-        applicationComponent.inject(this)
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerApplicationComponent.builder().create(this)
     }
 }
