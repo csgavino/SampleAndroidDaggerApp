@@ -1,22 +1,31 @@
 package com.example.myapplication.tasks
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import com.example.myapplication.R
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
 
-class MainActivity : DaggerAppCompatActivity(), MainView {
+class MainActivity : DaggerAppCompatActivity(), MainContract.View {
 
     @Inject
-    lateinit var presenter: MainPresenter
+    lateinit var presenter: MainContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        presenter.attachView()
+        val button = findViewById<Button>(R.id.button)
+        button.setOnClickListener { view ->
+            presenter.openTaskDetail()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.takeView(this)
     }
 
     override fun showTask(task: String) {

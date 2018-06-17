@@ -7,13 +7,13 @@ import dagger.Provides
 class MainActivityModule {
 
     @Provides
-    fun providesMainView(mainActivity: MainActivity): MainView {
+    fun providesMainView(mainActivity: MainActivity): MainContract.View {
         return mainActivity
     }
 
     @Provides
-    fun providesMainPresenter(mainView: MainView, taskRepository: TaskRepository): MainPresenter {
-        return DefaultMainPresenter(mainView, taskRepository)
+    fun providesMainPresenter(mainView: MainContract.View, taskRepository: TaskRepository): MainContract.Presenter {
+        return MainPresenter(mainView, taskRepository)
     }
 
     @Provides
