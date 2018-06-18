@@ -2,5 +2,5 @@ tests:
 	./gradlew test
 
 ci:
-	./gradlew connectedAndroidTest && \
+	./gradlew connectedMockDebugAndroidTest && \
 	./gradlew test
