@@ -15,9 +15,4 @@ class MainActivityModule {
     fun providesMainPresenter(mainView: MainContract.View, taskRepository: TaskRepository): MainContract.Presenter {
         return MainPresenter(mainView, taskRepository)
     }
-
-    @Provides
-    fun providesTaskRepository(): TaskRepository {
-        return DefaultTaskRepository()
-    }
 }
