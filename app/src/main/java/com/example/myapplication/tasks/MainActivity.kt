@@ -18,9 +18,9 @@ class MainActivity : DaggerAppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val email = findViewById<EditText>(R.id.emailEditText)
+        val email = findViewById<EditText>(R.id.edit_text_email)
 
-        val button = findViewById<Button>(R.id.button)
+        val button = findViewById<Button>(R.id.btn_submit)
         button.setOnClickListener { _ ->
             presenter.getTasks(email.text.toString())
         }
@@ -32,7 +32,7 @@ class MainActivity : DaggerAppCompatActivity(), MainContract.View {
     }
 
     override fun showTasks(task: String) {
-        val textView = findViewById<TextView>(R.id.labelTextView)
+        val textView = findViewById<TextView>(R.id.text_view_tasks)
         textView.text = task
     }
 }
