@@ -8,11 +8,11 @@ interface MainContract {
 
         fun takeView(view: MainContract.View)
 
-        fun openTaskDetail()
+        fun getTasks(email: String)
     }
 
     interface View : BaseView<Presenter> {
 
-        fun showTask(task: String)
+        fun showTasks(task: String)
     }
 }

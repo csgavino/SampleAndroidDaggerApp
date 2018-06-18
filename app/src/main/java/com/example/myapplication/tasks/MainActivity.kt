@@ -2,6 +2,7 @@ package com.example.myapplication.tasks
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.example.myapplication.R
 import dagger.android.support.DaggerAppCompatActivity
@@ -17,9 +18,11 @@ class MainActivity : DaggerAppCompatActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val email = findViewById<EditText>(R.id.emailEditText)
+
         val button = findViewById<Button>(R.id.button)
         button.setOnClickListener { _ ->
-            presenter.openTaskDetail()
+            presenter.getTasks(email.text.toString())
         }
     }
 
@@ -28,8 +31,8 @@ class MainActivity : DaggerAppCompatActivity(), MainContract.View {
         presenter.takeView(this)
     }
 
-    override fun showTask(task: String) {
+    override fun showTasks(task: String) {
         val textView = findViewById<TextView>(R.id.labelTextView)
-        textView.setText(task)
+        textView.text = task
     }
 }

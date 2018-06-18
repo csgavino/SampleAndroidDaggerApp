@@ -6,12 +6,10 @@ class MainPresenter @Inject constructor(private val mainView: MainContract.View,
                                         private val taskRepository: TaskRepository) : MainContract.Presenter {
 
     override fun takeView(view: MainContract.View) {
-        val tasks = taskRepository.getTasks()
-        mainView.showTask(tasks[0])
+        // noop
     }
 
-    override fun openTaskDetail() {
-        mainView.showTask("open task detail")
+    override fun getTasks(email: String) {
+        mainView.showTasks(taskRepository.getTasks(email).joinToString(", "))
     }
-
 }
