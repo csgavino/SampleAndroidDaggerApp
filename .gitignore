@@ -21,13 +21,8 @@ local.properties
 # Android Studio captures folder
 captures/
 
-*.iml
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/gradle.xml
-.idea/assetWizardSettings.xml
-.idea/dictionaries
-.idea/libraries
-.idea/caches
+gen-external-apklibs
 
-.externalNativeBuild
+# Intellij
+*.iml
+.idea/*
