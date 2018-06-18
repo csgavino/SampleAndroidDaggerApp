@@ -18,7 +18,7 @@ class MainActivity : DaggerAppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
 
         val button = findViewById<Button>(R.id.button)
-        button.setOnClickListener { view ->
+        button.setOnClickListener { _ ->
             presenter.openTaskDetail()
         }
     }
