@@ -1,6 +1,9 @@
 package com.example.myapplication.tasks
 
-interface TaskRepository {
+import retrofit2.Call
+import retrofit2.http.GET
 
-    fun getTasks(email: String): List<String>
+interface TaskRepository {
+    @GET("todos/1")
+    fun getTasks(): Call<Todo>
 }

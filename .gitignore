@@ -26,3 +26,5 @@ gen-external-apklibs
 # Intellij
 *.iml
 .idea/*
+
+.DS_Store

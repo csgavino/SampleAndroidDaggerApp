@@ -22,5 +22,5 @@ class MainPage {
 
     fun assertSuccess(): ViewInteraction =
             onView(ViewMatchers.withId(R.id.text_view_tasks))
-                    .check(ViewAssertions.matches(ViewMatchers.withText("Espresso")))
+                    .check(ViewAssertions.matches(ViewMatchers.withText("title")))
 }

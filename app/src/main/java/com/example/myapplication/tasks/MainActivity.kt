@@ -1,22 +1,23 @@
 package com.example.myapplication.tasks
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.myapplication.R
-import dagger.android.support.DaggerAppCompatActivity
-import javax.inject.Inject
+import com.example.myapplication.dependencyInjector
 
+class MainActivity : AppCompatActivity(), MainContract.View {
 
-class MainActivity : DaggerAppCompatActivity(), MainContract.View {
-
-    @Inject
     lateinit var presenter: MainContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        presenter = MainPresenter(dependencyInjector.taskRepository)
+        presenter.takeView(this)
 
         val email = findViewById<EditText>(R.id.edit_text_email)
 

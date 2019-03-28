@@ -1,12 +1,29 @@
 package com.example.myapplication
 
-import com.example.myapplication.di.DaggerApplicationComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import android.app.Activity
+import android.app.Application
+import com.example.myapplication.tasks.TaskRepository
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-class MainApplication : DaggerApplication() {
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerApplicationComponent.builder().create(this)
-    }
+interface DependencyInjector {
+    val taskRepository: TaskRepository
 }
+
+class DefaultDependencyInjector : DependencyInjector {
+    private val retrofit = Retrofit.Builder()
+            .baseUrl("https://jsonplaceholder.typicode.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    override val taskRepository: TaskRepository = retrofit.create(TaskRepository::class.java)
+}
+
+class MainApplication : Application() {
+    var dependencyInjector: DependencyInjector = DefaultDependencyInjector()
+}
+
+val Activity.app: MainApplication
+    get() = application as MainApplication
+
+val Activity.dependencyInjector: DependencyInjector
+    get() = app.dependencyInjector

@@ -1,15 +1,29 @@
 package com.example.myapplication.tasks
 
-import javax.inject.Inject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class MainPresenter @Inject constructor(private val mainView: MainContract.View,
-                                        private val taskRepository: TaskRepository) : MainContract.Presenter {
+class MainPresenter constructor(private val taskRepository: TaskRepository) : MainContract.Presenter {
+
+    lateinit var mainView: MainContract.View
 
     override fun takeView(view: MainContract.View) {
-        // noop
+        mainView = view
     }
 
     override fun getTasks(email: String) {
-        mainView.showTasks(taskRepository.getTasks(email).joinToString(", "))
+        taskRepository.getTasks()
+                .enqueue(object : Callback<Todo> {
+                    override fun onFailure(call: Call<Todo>, t: Throwable) {
+                        // noop
+                    }
+
+                    override fun onResponse(call: Call<Todo>, response: Response<Todo>) {
+                        if (response.isSuccessful) {
+                            mainView.showTasks(response.body()!!.title)
+                        }
+                    }
+                })
     }
 }
